@@ -5,42 +5,36 @@ const item = Array.from(document.getElementsByClassName('slider__item'));
 
 
 next[0].onclick = function() {
-    slidernext();
+    sliderNext();
 }
 
 prev[0].onclick = function() {
-    sliderprev();
+    sliderPrev();
 }
 
-let quantityNext = 0;
+let counter = 0;
 
-let slidernext = function() {
-    sliderremove();
-    if (quantityNext > item.length - 1) {
-        quantityNext = 0;
+let sliderNext = function() {
+    removeClass();
+    counter++;
+    if (counter > item.length - 1) {
+        counter = 0;
     }
-    console.log(quantityNext);
-    
-    item[quantityNext].classList.add('slider__item_active');
-    
-    
-    quantityNext++;
-    
+    item[counter].classList.add('slider__item_active');
+    console.log(counter);
 }
 
-let sliderprev = function() {
-    sliderremove();
-    if (quantityNext < 0) {
-        quantityNext = item.length - 1;
+let sliderPrev = function() {
+    removeClass();
+    counter--;
+    if (counter < 0) {
+        counter = item.length - 1;
     }
-    console.log(quantityNext);
-
-    item[quantityNext].classList.add('slider__item_active');
-    quantityNext = quantityNext - 1;
+    item[counter].classList.add('slider__item_active');
+    console.log(counter);
 }
 
-let sliderremove = function() {
-    for (let i = 0; i < item.length; i++){
-        item[i].classList.remove('slider__item_active');
-    }
+let removeClass = function() {
+   let element = item.find(items => items.classList.contains('slider__item_active'));
+   element.classList.remove('slider__item_active');
 }
